@@ -7,7 +7,10 @@ services:
       - "8000:80"
     volumes:
       - dokuwiki-data:/var/dokuwiki-storage
+    container_name:
+      dokuwiki      
 
 volumes:
   dokuwiki-data:
     driver: local
+  
