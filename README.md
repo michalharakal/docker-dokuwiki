@@ -3,7 +3,37 @@ istepanov/dokuwiki
 
 Docker container image with [DokuWiki](https://www.dokuwiki.org/dokuwiki) and nginx
 
-### How to run
+
+### How to run 
+#### Depedendencies
+
+* docker engine version 1.10.0 and prior
+* docker-compose 1.6.2
+
+#### Run
+The most easy way to get dokuwiki up and running is with docker-compose 
+
+    docker-compose up -d
+
+
+#### Backup 
+    # create dokuwiki-backup.tar.gz archive in current directory using temporaty container
+    docker run --rm --volumes-from dokuwiki -v $(pwd):/backup ubuntu tar zcvf /backup/dokuwiki-backup.tar.gz /var/dokuwiki-storage
+
+#### Restore from backup
+
+Backup file has to be in a working directory
+
+    # stop dokuwiki
+    docker stop dokuwiki
+
+    # restore from backup using temporary container
+    docker run --rm --volumes-from dokuwiki -w / -v $(pwd):/backup ubuntu tar xzvf /backup/dokuwiki-backup.tar.gz
+
+    # start dokuwiki
+    docker start dokuwiki
+
+### How to run manually
 
 Assume your docker host is localhost and HTTP public port is 8000 (change these values if you need).
 
