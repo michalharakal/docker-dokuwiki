@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  dokuwiki:
+    file: ./Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - dokuwiki-data:/var/dokuwiki-storage
+
+volumes:
+  dokuwiki-data:
+    driver: local
